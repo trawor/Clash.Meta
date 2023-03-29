@@ -75,7 +75,7 @@ func New(options LC.Tun, tcpIn chan<- C.ConnContext, udpIn chan<- C.PacketAdapte
 		}
 	}
 	tunName := options.Device
-	if tunName == "" {
+	if tunName == "" || runtime.GOOS == "darwin" { // macOS 忽略设置tun名称“device”
 		tunName = CalculateInterfaceName(InterfaceName)
 		options.Device = tunName
 	}
